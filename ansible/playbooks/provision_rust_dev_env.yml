@@ -18,15 +18,9 @@
           - git
           - vim
           - emacs
-        state: present
-
-    - name: Install Rust development packages
-      apt:
-        name:
           - rust-analyzer
           - tree-sitter-cli
         state: present
-      update_cache: yes
 
     - name: Add Rust support to Emacs config
       blockinfile:
