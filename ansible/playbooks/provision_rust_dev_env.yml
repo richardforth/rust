@@ -18,6 +18,7 @@
           - git
           - vim
           - emacs
+          - tree-sitter-cli
         state: present
 
     - name: Add Rust support to Emacs config
