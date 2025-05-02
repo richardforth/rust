@@ -22,7 +22,7 @@
 
     - name: Add Rust support to Emacs config
       blockinfile:
-        path: "{{ ansible_env.HOME }}/.emacs"
+        path: "/home/vagrant/.emacs"
         marker: ";;; ANSIBLE MANAGED RUST BLOCK"
         block: |
           (require 'package)
