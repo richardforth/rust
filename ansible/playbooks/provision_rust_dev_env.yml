@@ -1,0 +1,152 @@
+---
+- name: Set up Rust development environment
+  hosts: all
+  gather_facts: false
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install dependencies
+      apt:
+        name:
+          - curl
+          - build-essential
+          - git
+          - vim
+          - emacs
+        state: present
+
+    - name: Download rustup installer
+      get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/rustup.sh
+        mode: '0755'
+
+    - name: Install Rust using rustup
+      become_user: vagrant
+      shell: "/tmp/rustup.sh -y"
+      environment:
+        CARGO_HOME: /home/vagrant/.cargo
+        RUSTUP_HOME: /home/vagrant/.rustup
+        HOME: /home/vagrant
+      args:
+        creates: /home/vagrant/.cargo/bin/rustc
+
+    - name: Add Rust to PATH
+      lineinfile:
+        path: /home/vagrant/.profile
+        line: 'export PATH="$HOME/.cargo/bin:$PATH"'
+        create: yes
+        state: present
+      become_user: vagrant
+
+    - name: Source profile to apply Rust path
+      shell: source /home/vagrant/.profile
+      become_user: vagrant
+      args:
+        executable: /bin/bash
+
+    - name: get rustc version (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/rustc --version
+      register: rustc_version
+
+    - name: debug rustc_version output
+      debug:
+        msg: "{{ rustc_version.stdout }}"
+ 
+    - name: get cargo version (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/cargo --version
+      register: cargo_version
+
+    - name: debug cargo_version output
+      debug:
+        msg: "{{ cargo_version.stdout }}"
+
+    - name: ensure we are running the latest rust toolchain versions (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/rustup update
+      register: rustup_update
+
+    - name: debug rustup_update output
+      debug:
+        msg: "{{ rustup_update.stdout_lines }}"
+
+    - name: create a rust folder for storing projects in
+      file:
+        path: /vagrant/rust
+        state: directory
+      become_user: vagrant
+
+    - name: create a rust folder for storing hello world project in
+      file:
+        path: /vagrant/rust/hello_rust
+        state: directory
+      become_user: vagrant
+
+    - name: Add Hello World Rust code
+      blockinfile:
+        path: /vagrant/rust/hello_rust/main.rs
+        create: yes
+        owner: vagrant
+        group: vagrant
+        mode: '0644'
+        block: |
+          fn main() {
+              println!("Hello, world!");
+          }
+        marker: "// {mark} ANSIBLE MANAGED BLOCK"
+
+    - name: Compile the Rust program (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/rustc main.rs
+      args:
+        chdir: /vagrant/rust/hello_rust
+        creates: /vagrant/rust/hello_rust/main
+
+    - name: Run the compiled Rust program
+      become_user: vagrant
+      shell: ./main
+      args:
+        chdir: /vagrant/rust/hello_rust
+      register: rust_hello
+
+    - name: debug program output
+      debug:
+        msg: "{{ rust_hello.stdout }}"
+
+    - name: create a test cargo project (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/cargo new hello_cargo
+      args:
+        chdir: /vagrant/rust/
+        creates: /vagrant/rust/hello_cargo
+
+    - name: build default cargo project (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/cargo build
+      args:
+        chdir: /vagrant/rust/hello_cargo
+        creates: /vagrant/rust/hello_cargo/target/debug/hello_cargo
+      register: cargo_build
+
+    - name: debug cargo_build output
+      debug:
+        msg: "{{ cargo_build.stdout_lines }}"
+
+    - name: use cargo run if the compiled target already exists (ansible uses the explicit path)
+      become_user: vagrant
+      shell: /home/vagrant/.cargo/bin/cargo run
+      args:
+        chdir: /vagrant/rust/hello_cargo
+      register: cargo_run
+      when: cargo_build.stdout.find('skipped') != -1
+
+    - name: debug cargo_run output
+      debug:
+        msg: "{{ cargo_run.stdout_lines }}"
+      when: cargo_run is defined
