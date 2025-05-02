@@ -8,7 +8,8 @@
     - name: Update apt cache
       apt:
         update_cache: yes
-
+        
+        
     - name: Install dependencies
       apt:
         name:
@@ -19,6 +20,52 @@
           - emacs
         state: present
 
+    - name: Install Rust development packages
+      apt:
+        name:
+          - rust-analyzer
+          - tree-sitter-cli
+        state: present
+      update_cache: yes
+
+    - name: Add Rust support to Emacs config
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.emacs"
+        marker: ";;; ANSIBLE MANAGED RUST BLOCK"
+        block: |
+          (require 'package)
+          (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+          (package-initialize)
+
+          (unless package-archive-contents
+            (package-refresh-contents))
+
+          (unless (package-installed-p 'use-package)
+            (package-install 'use-package))
+
+          (require 'use-package)
+
+          (use-package rust-mode
+            :ensure t
+            :config
+            (setq rust-format-on-save t))
+
+          (use-package tree-sitter
+            :ensure t
+            :config
+            (global-tree-sitter-mode))
+
+          (use-package tree-sitter-langs
+            :ensure t)
+
+          (add-hook 'rust-mode-hook #'tree-sitter-mode)
+          (add-hook 'rust-mode-hook #'tree-sitter-hl-mode)
+
+          (use-package lsp-mode
+            :ensure t
+            :hook (rust-mode . lsp)
+            :commands lsp)
+            
     - name: Download rustup installer
       get_url:
         url: https://sh.rustup.rs
