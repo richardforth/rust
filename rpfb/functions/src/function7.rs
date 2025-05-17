@@ -1,12 +1,5 @@
 fn main() {
     // Example of functions calling each other
-    // However this isnt the right code in the book
-    // It appears that this code and the next code are duplicated
-
-    // This code was supposed to be about returning vectors from functions.
-    // I will persevere, and copy this code for the next exercise. But I
-    // will need to come back to this to run a test to return a Vector type.
-    // even if I have to ask ChatGPT, as the correct example is missing in the book.
     println!("Inside main function, calling function_1.");
     function_1();
 
