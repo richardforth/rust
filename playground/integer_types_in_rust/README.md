@@ -1,3 +1,4 @@
+```
     Length  Type  Description                                     Min Value                                     Max Value
      8 bit    i8   Signed Int                                          -128                                           127
      8 bit    u8 Unsigned Int                                             0                                           255
@@ -11,3 +12,4 @@
    128 bit  u128 Unsigned Int                                             0       340282366920938463463374607431768211455
   Platform isize   Signed Int                             Platform Specific                             Platform Specific
   Platform usize Unsigned Int                             Platform Specific                             Platform Specific
+```
