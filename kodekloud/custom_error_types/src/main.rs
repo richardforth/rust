@@ -1,17 +1,19 @@
 use std::fmt;
 
 #[derive(Debug)]
-enum CustomError {
-    NotFound,
-    PermissionDenied,
-    ConnectionFailed,
-}
-
-#[derive(Debug)]
 enum NetworkError {
     Disconnected,
     Timeout,
 }
+
+#[derive(Debug)]
+enum CustomError {
+    NotFound,
+    PermissionDenied,
+    ConnectionFailed,
+    Network(NetworkError), // wraps a Network error
+}
+
 
 impl fmt::Display for CustomError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
