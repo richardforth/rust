@@ -7,6 +7,12 @@ enum CustomError {
     ConnectionFailed,
 }
 
+#[derive(Debug)]
+enum NetworkError {
+    Disconnected,
+    Timeout,
+}
+
 impl fmt::Display for CustomError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
