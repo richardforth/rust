@@ -1,0 +1,11 @@
+[package]
+name = "logging_with_slog_crate_for_structured_logging"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+slog = "2.7"
+slog-async = "2.7"
+slog-term = "2.8"
+slog-json = "2.4"
+slog-log = "0.4"
