@@ -15,6 +15,11 @@ mod front_of_house {
 }
 
 mod back_of_house {
+    pub enum Appetizer {
+        Soup,
+        Salad,
+    }
+
     pub struct Breakfast {
         pub toast: String,
         seasonal_fruit: String,
@@ -48,6 +53,9 @@ pub fn eat_at_restaurant() {
     // allowed to see or modify the seasonal fruit that comes
     // with the meal.
     // meal.seasonal_fruit = String::from("blueberries");
+
+    let order1 = back_of_house::Appetizer::Soup;
+    let order2 = back_of_house::Appetizer::Salad;
 }
 
 fn deliver_order() {}
