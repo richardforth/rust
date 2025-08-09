@@ -85,5 +85,10 @@ fn main() {
         Ok(user) => println!("Success: {}", user),
         Err(e) => println!("Error: {}", e),
     }
+
+    match perform_task() {
+        Ok(_) => println!("Task completed successfully"),
+        Err(e) => println!("Task failed: {}", e),
+    }
 }
  
