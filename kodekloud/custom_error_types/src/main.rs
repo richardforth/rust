@@ -2,9 +2,10 @@
 enum CustomError {
     NotFound,
     PermissionDenied,
-    ConnectionFailed.
+    ConnectionFailed,
 }
 
 fn main() {
-    
+    let error = CustomError::NotFound;
+    println!("{:?}", error); 
 }
