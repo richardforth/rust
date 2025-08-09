@@ -31,7 +31,19 @@ fn find_user(user_id: u32) -> Result<String, CustomError> {
 }
 
 fn main() {
+    match find_user(0) {
+        Ok(user) => println!("Success: {}", user),
+        Err(e) => println!("Error: {}", e),
+    }
     match find_user(1) {
+        Ok(user) => println!("Success: {}", user),
+        Err(e) => println!("Error: {}", e),
+    }
+    match find_user(2) {
+        Ok(user) => println!("Success: {}", user),
+        Err(e) => println!("Error: {}", e),
+    }
+    match find_user(5) {
         Ok(user) => println!("Success: {}", user),
         Err(e) => println!("Error: {}", e),
     }
