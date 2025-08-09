@@ -14,6 +14,14 @@ enum CustomError {
     Network(NetworkError), // wraps a Network error
 }
 
+impl fmt::Display for NetworkError {
+    fn fmt(&self, f: &mut fmt:: Formatter) -> fmt::Result {
+        match self {
+            NetworkError:: Disconnected => write! (f, "Network disconnected"),
+            NetworkError:: Timeout => write! (f, "Network timeout"),
+        }
+    }
+}
 
 impl fmt::Display for CustomError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -21,11 +29,33 @@ impl fmt::Display for CustomError {
             CustomError::NotFound => write!(f, "Resource not found"),
             CustomError::PermissionDenied => write!(f, "Permission denied"),
             CustomError::ConnectionFailed => write!(f, "Connection failed"),
+            CustomError::Network(e) => write!(f, "Network error: {}", e),
         }
     }
 }
 
+impl std::error::Error for NetworkError {}
 impl std::error::Error for CustomError {}
+
+// Implement the From trait for converting NetworkError into CustomError
+impl From<NetworkError> for CustomError {
+    fn from(error: NetworkError) -> Self {
+        CustomError:: Network(error) // Wraps NetworkError inside CustomError:: Network
+    }
+}
+
+// Simulating a function that returns a NetworkErrоr
+fn connect_to_network() -> Result<(), NetworkError>{
+    Err(NetworkError:: Disconnected) // Simulating a network error
+}
+
+// Function that uses the From trait to convert NetworkError into CustomError
+fn perform_task() -> Result<(), CustomError> {
+    // connect_to_network returns Result<(), NetworkError>.
+    // The 7 operator will convert NetworkError into CustomError using the From trait.
+    connect_to_network()?;
+    Ok(())
+}
 
 fn find_user(user_id: u32) -> Result<String, CustomError> {
     if user_id == 0 {
