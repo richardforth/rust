@@ -26,7 +26,8 @@ fn main() {
 
 	// contains()
 	println!("Does HashMap contain key Kenny? {}", student_grades.contains_key("Kenny"));
-	
+	// note: there is no sister method contains_value, which is a shame
+
 	// entry(key).or_insert(value)
 	let sally_grade = student_grades.entry("Sally").or_insert(78); // should return Sally's grade as she exists in the HashMap, grade unchanged at 65
 	println!("Sally's grade is {}", sally_grade);
