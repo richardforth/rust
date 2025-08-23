@@ -1,0 +1,6 @@
+[package]
+name = "vector_iteration_with_for_loop_and_mutation"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
