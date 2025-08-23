@@ -1,0 +1,6 @@
+[package]
+name = "struct_with_enum_and_progression_using_impl_methods"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
