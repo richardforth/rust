@@ -1,0 +1,6 @@
+[package]
+name = "hashmap_update_using_entry_or_insert_dot_notation"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
