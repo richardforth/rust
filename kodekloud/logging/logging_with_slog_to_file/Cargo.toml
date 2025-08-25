@@ -1,0 +1,10 @@
+[package]
+name = "logging_with_slog_to_file"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+slog = "2.7"
+slog-async = "2.7"
+slog-term = "2.8"
+slog-json = "2.4"

@@ -1,0 +1,6 @@
+Aug 25 00:39:30.966 INFO Application started, version: 1.0.0
+Aug 25 00:39:30.969 DEBG Variable set, name: Richard
+Aug 25 00:39:30.969 DEBG Printed message to screen, message: Hello, Richard.
+Aug 25 00:39:30.970 WARN This is a warning message
+Aug 25 00:39:30.970 ERRO This is an error message
+Aug 25 00:39:30.970 INFO Application Finished, version: 1.0.0
