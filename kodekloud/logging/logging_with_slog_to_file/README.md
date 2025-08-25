@@ -1,6 +1,6 @@
 # Notes on using slog to log to a file
 
-While this is in the Kodekloud section, it wasn't actually covered in the course (logging to a file). We got look at log and slog usage, but only to the console and I just got curious, and with a little help from the docs:
+While this is in the Kodekloud section, it wasn't actually covered in the course (logging to a file). We looked at log and slog usage, but only to the console and I just got curious, and with a little help from the docs:
 
 https://docs.rs/slog/latest/slog/#where-to-start
 
