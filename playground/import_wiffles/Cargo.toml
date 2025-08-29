@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-wiffles = { git = "https://github.com/richardforth/wiffles", version = "0.0.3" }
+wiffles = { git = "https://github.com/richardforth/wiffles", branch = "main" } # version does use tags!
