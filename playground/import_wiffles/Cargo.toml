@@ -4,8 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-wiffles = { git = "https://github.com/richardforth/wiffles", branch = "main" } # version does use tags!
-
-# other options (note im not using tags at the moment)
+wiffles = { git = "https://github.com/richardforth/wiffles", branch = "main" } # version does NOT use tags!
+# TODO: Add a tag 0.0.3 to the wiffles repo
 # wiffles = { git = "https://github.com/richardforth/wiffles", tag = "0.0.3" }
 # wiffles = { git = "https://github.com/richardforth/wiffles", version = "0.0.3" } # still not clear how this works, thought it was tag but alas no
