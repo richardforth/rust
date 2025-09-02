@@ -4,9 +4,10 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     let name = if args.len() > 1 {
-        &args[1]
+        // Add functionality to blend all args into one single string
+        args[1..].join(" ")
     } else {
-        "Rustacean"
+        "Rustacean".to_string()
     };
 
     // Add condition if name is admin, let them know all systems are operational
@@ -15,4 +16,6 @@ fn main() {
     } else {
         println!("Hello {}, welcome to Rust!", name);
     }
+  
+   
 }
