@@ -1,4 +1,5 @@
 use std::env;
+use colored::*;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -11,7 +12,11 @@ fn main() {
 
     if !name.chars().all(|c|
         c.is_alphabetic() || c.is_whitespace()) {
-            eprintln!("Error: Name must only contain letters and spaces.");
+            eprintln!("[ {} ] Error: Name must only contain letters and spaces.",
+            "!!".red());
             std::process::exit(1)
     }
+
+    println!("[ {} ] Validated string: {}", 
+    "OK".green(), name.yellow());
 }
