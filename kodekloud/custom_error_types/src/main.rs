@@ -34,6 +34,8 @@ impl fmt::Display for CustomError {
     }
 }
 
+// Implement error trait to work seamlessly wth Rust's Error handling ecosystem
+// using standard library features
 impl std::error::Error for NetworkError {}
 impl std::error::Error for CustomError {}
 
