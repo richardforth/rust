@@ -17,8 +17,8 @@ enum CustomError {
 impl fmt::Display for NetworkError {
     fn fmt(&self, f: &mut fmt:: Formatter) -> fmt::Result {
         match self {
-            NetworkError:: Disconnected => write! (f, "Network disconnected"),
-            NetworkError:: Timeout => write! (f, "Network timeout"),
+            NetworkError::Disconnected => write! (f, "Network disconnected"),
+            NetworkError::Timeout => write! (f, "Network timeout"),
         }
     }
 }
