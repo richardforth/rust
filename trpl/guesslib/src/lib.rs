@@ -4,9 +4,14 @@ pub struct Guess {
 
 impl Guess {
     pub fn new(value: i32) -> Guess {
-        if value < 1 || value > 100 {
+        if value < 1 {
             panic!(
-                "Guess value must be between 1 and 100, got {}.",
+                "Guess value must be greater than or equal to 1, but less than 100,  got {}.",
+                value
+            );
+        } else if value > 100 {
+            panic!(
+                "Guess value must be less than or equal to 100, but greater than 1, got {}.",
                 value
             );
         }
@@ -20,19 +25,19 @@ mod tests {
     use super::*;
 
     #[test]
-    #[should_panic]
+    #[should_panic(expected = "less than or equal to 100")]
     fn greater_than_100() {
         Guess::new(200);
     }
 
     #[test]
-    #[should_panic]
+    #[should_panic(expected = "greater than or equal to 1")]
     fn less_than_1() {
         Guess::new(0);
     }
 
     #[test]
-    #[should_panic]
+    #[should_panic(expected = "greater than or equal to 1")]
     fn less_than_zero() {
         Guess::new(-1);
     }
