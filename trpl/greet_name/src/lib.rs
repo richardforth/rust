@@ -1,6 +1,5 @@
 pub fn greet_name(name: &str) -> String {
-     //format!("Hello {name}!")
-     String::from("Hello")
+     format!("Hello {name}!")
 }
 
 #[cfg(test)]
