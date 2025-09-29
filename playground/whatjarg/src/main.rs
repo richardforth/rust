@@ -1,11 +1,6 @@
 use std::env;
 use whatjarg;
 
-fn usage() {
-    println!("USAGE: get_azure_url <shortcode>");
-    println!("       (takes only 1 argument)");
-}
-
 fn main() {
 
     // collect all the args
@@ -14,7 +9,7 @@ fn main() {
     //  Ensure only one argument is passed, if more than one, display usage and exit
     if args.len() != 2 {
         eprintln!("Error: Please supply exactly one argument.");
-        usage();
+        whatjarg::usage();
         std::process::exit(1);
     }
     // get the shortcode from the args

@@ -1,3 +1,9 @@
+pub fn usage() {
+    println!("USAGE: get_azure_url <shortcode>");
+    println!("       (takes only 1 argument)");
+}
+
+
 pub fn get_jarg(sc: &String) -> String {
      let normalized_sc = sc.to_lowercase();
       match normalized_sc.as_str() {
