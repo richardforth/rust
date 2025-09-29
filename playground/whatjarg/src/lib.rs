@@ -10,6 +10,9 @@ pub fn get_jarg(sc: &String) -> String {
           "abc" => {
               format!("\n\tAbstract Base Class (Python).\n\tABC Programming language, precusror to Python.\n")
           }
+          "roi" => {
+              format!("\n\tReturn On Investment\n\tRepublic Of Ireland\n")
+          }
           "soflam" => {
               format!("\n\tSpecial Operations Forces Laser Aquisition Marker\n")
           }
